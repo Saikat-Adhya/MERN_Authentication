@@ -1,0 +1,38 @@
+<h2>Welcome, <%= current %>!</h2>
+<h2>Welcome, <%= namei %>!</h2>
+
+<form action="/api/auth/logout" method="GET" style="text-align: right">
+  <button type="submit">Logout</button>
+</form>
+
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach((u,i)=>{ %>
+    <tr>
+      <td><%= i+1 %></td>
+      <td><%= u.name %></td>
+      <td><%= u.email %></td>
+      <td>
+        <a href="/api/auth/edit/<%= u._id %>">Edit</a>
+        <form
+          action="/api/auth/delete/<%= u._id %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button onclick="return confirm('Delete user?')" type="submit">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
